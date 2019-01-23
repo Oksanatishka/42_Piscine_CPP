@@ -1,0 +1,187 @@
+http://www.cplusplus.com/reference/iostream/
+The compiler to use is clang++.
+------------------------------------------------------------------------------------------------------------
+D00 - C++ Basics
+
+INTRODUCTION
+NAMESPACES
+  Open main.cpp file.
+  
+  #include <stdio.h>
+  int gl_var = 1;
+  int f( void ) {return 2;}
+  
+  namespace Foo {
+    int gl_var = 3;
+    int f( void ) {return 4;}
+  }
+  
+  namespace Bar {
+    int gl_var = 5;
+    int f( void ) {return 6;}
+  }
+  
+  namespace Muf = Bar;
+  
+  int main(void) {
+    printf("gl_var:   [%d]\n", gl_var);
+    printf("f():      [%d]\n\n", f());
+    
+    // :: is scope resolution operator
+    printf("Foo::gl_var:   [%d]\n", Foo::gl_var);
+    printf("Foo::f():      [%d]\n\n", Foo::f());
+    
+    printf("Bar::gl_var:   [%d]\n", Bar::gl_var);
+    printf("Bar::f():      [%d]\n\n", Bar::f());
+    
+    printf("Muf::gl_var:   [%d]\n", Muf::gl_var);
+    printf("Muf::f():      [%d]\n\n", Muf::f());
+    
+    printf("::gl_var:   [%d]\n", ::gl_var); // the output of '::gl_var' will be the same as 'gl_var'.
+    printf("::f():      [%d]\n\n", ::f());  
+    
+    return 0;
+  }
+  
+  To compile: g++ -Wall -Wextra -Wno-used -Werror main.cpp
+  To run: ./a.out
+  
+STDIO STREAMS
+  Let's see how c++ handles inputs & outputs
+  
+  Open main.cpp
+  
+  #include <iostream>
+  int main(void) {
+    char buff[512];
+    std::cout << "Hello world !" << std::endl;
+    std::cout << "Input a word: ";
+    std::cin >> buff;
+    std::cout << "You entered: [" << buff << "]" << std::endl;
+    return 0;
+  }
+
+CLASS AND INSTANCE
+  Open Sample.class.h (to declare the class and f-ns and attributes)
+  
+  #ifndef SAMPLE_CLASS_H
+  # define SAMPLE_CLASS_H
+  class Sample {
+  public: 
+    Sample(void);
+    ~Sample(void);
+  };
+  #endif
+  
+  Open Sample.class.cpp (to define these f-ns present in class)
+  
+  #include <iostream>
+  #include "Sample.class.hpp"
+  Sample::Sample(void){
+    std::cout << "Constructor called" << std::endl;
+    return;
+  }
+  Sample::~Sample(void){
+    std::cout << "Destructor called" << std::endl;
+    return;
+  }
+  
+  Let's see how to create instance
+  
+  #include "Sample.class.hpp"
+  int main() {
+    Sample instance;
+    return 0;
+  }
+  
+
+MEMBER ATTRIBUTES AND MEMBER FUNCTIONS
+THIS
+INITIALIZATION LIST
+CONST
+VISIBILITY
+CLASS VS STRUCT
+ACCESSORS
+COMPARISONS
+NON MEMBER ATTRIBUTES AND NON MEMBER FUNCTIONS
+POINTERS TO MEMBERS
+CONCLUSION
+
+------------------------------------------------------------------------------------------------------------
+
+D01 - C++ Basics 2
+
+NEW AND DELETE
+REFERENCES
+FILESTREAM
+
+------------------------------------------------------------------------------------------------------------
+
+D02
+
+INTRODUCTION
+AD-HOC POLYMORPHISM
+OPERATOR OVERLOAD
+CANONICAL FORM
+CONCLUSION
+
+------------------------------------------------------------------------------------------------------------
+
+D03 - Inheritance
+
+INHERITANCE C++
+
+------------------------------------------------------------------------------------------------------------
+
+D04 - Sub-typing polymorphism
+
+SUB-TYPING POLYMORPHISM
+ABSTRACT CLASSES AND INTERFACES
+
+------------------------------------------------------------------------------------------------------------
+
+D05 - Nested classes and Exceptions
+
+NESTED CLASSES
+EXCEPTIONS
+
+------------------------------------------------------------------------------------------------------------
+
+D06 - Casts
+
+INTRODUCTION
+FROM C - TYPE CONVERSION
+FROM C - TYPE REINTERPRETATION
+FROM C - TYPE QUALIFIER REINTERPRETATION
+UPCAST AND DOWNCAST
+STATIC CAST
+DYNAMIC CAST
+REINTERPRET CAST
+CONST CAST
+CAST OPERATORS
+EXPLICIT KEYWORD
+CONCLUSION
+
+------------------------------------------------------------------------------------------------------------
+
+D07 - Templates
+
+INTRODUCTION
+TEMPLATES
+DEFAULT TYPE
+SPECIALIZATION
+CONCLUSION
+FROM C - PARAMETRIC MACROS
+
+------------------------------------------------------------------------------------------------------------
+
+D08 - STL
+
+STL
+
+------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
+
+MY NOTES
+
+
