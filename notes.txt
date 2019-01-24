@@ -1,3 +1,4 @@
+http://www.cplusplus.com/doc/tutorial/
 http://www.cplusplus.com/reference/iostream/
 The compiler to use is clang++.
 ------------------------------------------------------------------------------------------------------------
@@ -49,7 +50,7 @@ NAMESPACES
 STDIO STREAMS
   Let's see how c++ handles inputs & outputs
   
-  Open main.cpp
+  Open main.cpp (to test)
   
   #include <iostream>
   int main(void) {
@@ -68,8 +69,8 @@ CLASS AND INSTANCE
   # define SAMPLE_CLASS_H
   class Sample {
   public: 
-    Sample(void);
-    ~Sample(void);
+    Sample(void);       // declaration of constructor
+    ~Sample(void);      // declaration of destructor
   };
   #endif
   
@@ -86,25 +87,265 @@ CLASS AND INSTANCE
     return;
   }
   
-  Let's see how to create instance
+  Open main.cpp. 
+  Let's see how to create instance. 
   
   #include "Sample.class.hpp"
   int main() {
     Sample instance;
     return 0;
   }
-  
 
 MEMBER ATTRIBUTES AND MEMBER FUNCTIONS
+    Now that we know how to declare class and implement its constructor and its destructor, 
+    we'll discover how to put things in our class to make it more useful. We'll discover the notion of member attribute and member f-n.
+    A member attribute is just variable you have in your class and you may use from an instance.
+    A member f-n is a f-n in my class that I'll be able to use from the instance of my class.
+    In C, if we want to add a f-n to our structure - it would be impossible in C, the only way to do it is to have a pointer 
+    on a f-n in our structure.
+    In C++, we have a possibility to declare directly a f-n in our class. The implementation of this f-n as well as its definition
+    work the same way as a constructor and a desctructor but this time we'll have a return type in front.
+    
+    Open Sample.class.h 
+  
+    #ifndef SAMPLE_CLASS_H
+    # define SAMPLE_CLASS_H
+    class Sample {
+    public: 
+      int foo;        // (member attribute) declaration of integer variable named foo
+      Sample(void);
+      ~Sample(void);
+      void bar(void); // member f-n (will be usuful when the class will be instanciated)
+    };
+    #endif
+
+    Open Sample.class.cpp 
+
+    #include <iostream>
+    #include "Sample.class.hpp"
+    Sample::Sample(void){
+      std::cout << "Constructor called" << std::endl;
+      return;
+    }
+    Sample::~Sample(void){
+      std::cout << "Destructor called" << std::endl;
+      return;
+    }
+    //
+    void Sample::bar(void) {
+      std::cout << "Member f-n bar called" << std::endl;
+      return;
+    }
+    
+    Open main.cpp
+  
+    #include "Sample.class.hpp"
+    int main() {
+      Sample instance;
+      instance.foo = 42;
+      std::cout << "instance.foo: " << instance.foo << std:endl;
+      instance.bar();   // to call member f-n
+      return 0;
+    }
+    //so instance is stack variable
+    
+    
 THIS
+  this is a pointer to current instance
+  
+  Open Sample.class.cpp 
+
+    #include <iostream>
+    #include "Sample.class.hpp"
+    Sample::Sample(void){
+      std::cout << "Constructor called" << std::endl;
+      this->foo = 42;
+      std::cout << "this->foo: " << this->foo << std::endl;
+      this->bar();
+      return;
+    }
+    Sample::~Sample(void){
+      std::cout << "Destructor called" << std::endl;
+      return;
+    }
+    //
+    void Sample::bar(void) {
+      std::cout << "Member f-n bar called" << std::endl;
+      return;
+    }
+    
+    // To compile: g++ -Wall -Wextra -Wno-used -Werror Sample.class.cpp main.cpp
+  
+  
 INITIALIZATION LIST
+    Open Sample1.class.h 
+  
+    #ifndef SAMPLE1_CLASS_H
+    # define SAMPLE1_CLASS_H
+    class Sample1 {
+    public: 
+      // attributes
+      char a1;
+      int a2;
+      float a3;
+      
+      Sample1(char p1, int p2, float p3);  // constructor's parameters
+      ~Sample1(void);
+      
+    };
+    #endif  
+    
+    Open Sample2.class.cpp 
+
+    #include <iostream>
+    #include "Sample2.class.hpp"
+    // here I use a syntax called initialization list
+    Sample2::Sample2(char p1, int p2, float p3) : a1(p1), a2(p2), a3(p3){
+      std::cout << "Constructor called" << std::endl;
+      std::cout << "this->a1: " << this->a1 << std::endl;
+      std::cout << "this->a2: " << this->a2 << std::endl;
+      std::cout << "this->a3: " << this->a3 << std::endl;
+      return;
+    }
+    Sample2::~Sample2(void){
+      std::cout << "Destructor called" << std::endl;
+      return;
+    }
+    
+    // use syntax from above - not from below
+    Sample1::Sample1(char p1, int p2, float p3) {
+      std::cout << "Constructor called" << std::endl;
+      this->a1 = p1;
+      std::cout << "this->a1: " << this->a1 << std::endl;
+      this->a2 = p2;
+      std::cout << "this->a2: " << this->a2 << std::endl;
+      this->a3 = p3;
+      std::cout << "this->a3: " << this->a3 << std::endl;
+      return;
+    }
+    
+    Open main.cpp
+    #include <iostream>
+    #include "Sample1.class.hpp"
+    #include "Sample2.class.hpp"
+    int main() {
+      Sample1 instance1 ('a', 42, 4.2f);
+      Sample2 instance2 ('z', 13, 3.14f);
+      return 0;
+    }
+    
+    // To compile: g++ -Wall -Wextra -Wno-used -Werror Sample1.class.cpp Sample2.class.cpp main.cpp
+    
 CONST
+  We can't assign value to const, we can only initialize const to the value
+  
+  Open Sample1.class.h 
+  
+    #ifndef SAMPLE_CLASS_H
+    # define SAMPLE_CLASS_H
+    class Sample {
+    public: 
+      float const pi;
+      int         qd;
+      
+      Sample(float const f);  
+      ~Sample(void);
+      void bar(void) const;
+    };
+    #endif  
+    
+    Open Sample.class.cpp 
+
+    #include <iostream>
+    #include "Sample.class.hpp"
+    Sample::Sample(float const f) : pi(f), qd(42){
+      std::cout << "Constructor called" << std::endl;
+      return;
+    }
+    Sample::~Sample(void){
+      std::cout << "Destructor called" << std::endl;
+      return;
+    }
+    void Sample::bar(void) const {
+      std::cout << "this->pi: " << this->pi << std::endl; 
+      std::cout << "this->qd: " << this->qd << std::endl;
+      //this->qd = 0; // read-only error
+      return;
+    }
+    
+    
 VISIBILITY
+  public and private keywords wil allow me to control encapsulation of the members of our class.
+  That means Members attributes and f-ns will be visible from inside of class or from outside.
+  Use undescore for private.
+  If you try to access private attribute or f-n - it won't compile.
+  
 CLASS VS STRUCT
+  Structures(but without specifying public/private which won't lead to error in compiling) have the same syntax as classes. 
+  Structures and classes works in the same way in C++. It's all about outputs.
+  So, The difference is that the scope in structures is public by default. 
+  
+    #ifndef SAMPLE1_CLASS_H
+    # define SAMPLE1_CLASS_H
+    struct Sample1 {
+    public: 
+      int  foo;
+      
+      Sample1(void);  
+      ~Sample1(void);
+      void bar(void) const;
+    };
+    #endif 
+  
 ACCESSORS
+    get, getFoo [get followed by a name of getter]
+    set
+    
+    Open Sample.class.cpp
+    ..
+    public: 
+      Sample1(void);  
+      ~Sample1(void);
+      int getFoo(void) const;
+      void setFoo(int v);
+    };
+    private:
+      int _foo;
+    ..
+    
+    Open Sample.class.php
+    ....
+    int Sample::getFoo(void) const {
+      return this->_foo;
+    }
+    int Sample::setFoo(int v) {
+      if (v >= 0)
+          this->_foo = v;
+      return;
+    }
+    
 COMPARISONS
+  == 
+  
+  if (&instance1 == &instance1) 
+      std::count << "instance1 and instance1 are physically equal" << std:endl;
+  if (&instance1.compare(&instance1) == 0) 
+      std::count << "instance1 and instance1 are structurally equal" << std:endl;
+    
 NON MEMBER ATTRIBUTES AND NON MEMBER FUNCTIONS
+    Open Sample.class.cpp
+    ..
+    public: 
+      Sample1(void);  
+      ~Sample1(void);
+      static int getNbInst(void);
+    };
+    private:
+      static int _nbInst;
+    ..
+    
 POINTERS TO MEMBERS
+
 CONCLUSION
 
 ------------------------------------------------------------------------------------------------------------
@@ -112,17 +353,124 @@ CONCLUSION
 D01 - C++ Basics 2
 
 NEW AND DELETE
+    Memory management 
+    In C, you used malloc(); In C++, you also can but it's a bad idea.
+    
+    #include <string>
+    class Student {
+      private:
+          std:: string _login;
+      public:
+          // Student() : _login("ldefault")
+          Student(std:: string login) : _login(login);
+          {
+              std:: count << "Student " << this->_login << "is born" << std::endl;
+          }
+          ~Student();
+          {
+              std:: count << "Student " << this->_login << "is died" << std::endl;
+          }
+    };
+    int main() {
+        // Student* students = new Student[42];
+        Student bob = Student("bfubar");
+        Student* jim = new Student("jfubar");
+        // Do some stuff here
+        // deallocate, there used to be malloc free, now it's delete
+        // delete [] students;
+        delete jim;   //jim is destroyed
+        return 0;     // bob is destroyed
+    }
+    
 REFERENCES
+    Now let's talk about new C++ concept - references.
+    We'll do comparison to pointers in C.
+    
 FILESTREAM
-
+  how to use input/outputs to make actions in files.
+  ifstream - input file stream
+  ofstream - output file stream
+  
+  Open fstream1.cpp
+  
+  #include <iostream>
+  #include <fstream>
+  int main() {
+      std::ifstream   ifs("numbers");
+      unsigned int    dst;
+      unsigned int    dst2;
+      ifs >> dst >> dst2;
+      std::count << dst << " " << dst2 << std::endl;
+      ifs.close();
+      //------------
+      std::ofstream   ifs("test.out");
+      ofs << "i like ponies" << std::endl;
+      ofs.close();
+  }
+  
+  To compile: g++ fstream1.cpp
+  ./a.out
+  cat test.out
+  rm test.out
+  
 ------------------------------------------------------------------------------------------------------------
 
 D02
 
 INTRODUCTION
 AD-HOC POLYMORPHISM
+    Function overloading. 
+    Principle: you have 1 f-n name and different parameters for overload - this will allow you to specialize the process of a f-n
+    based on parameters.
+    
+    Open Sample.class.h
+  
+    #ifndef SAMPLE_CLASS_H
+    # define SAMPLE_CLASS_H
+    class Sample {
+    public: 
+      Sample(void);       
+      ~Sample(void);      
+      // below you see 4 bar overloads
+      void bar(char const c) const;
+      void bar(int const n) const;
+      void bar(float const z) const;
+      void bar(Sample const & i) const;
+    };
+    #endif
+    
+    Open Sample.class.cpp
+    ..
+    void Sample::bar(char const c) const {
+      std:: count << "Member f-n bar called with char overload" << std::endl;   
+      return;
+    }
+    void Sample::bar(int const n) const {
+      std:: count << "Member f-n bar called with int overload" << std::endl;   
+      return;
+    }
+    void Sample::bar(float const z) const {
+      std:: count << "Member f-n bar called with float overload" << std::endl;   
+      return;
+    }
+    void Sample::bar(Sample const & i) const {
+      std:: count << "Member f-n bar called with Sample class overload" << std::endl;   
+      return;
+    }
+    ..
+    
+    
 OPERATOR OVERLOAD
+    + 1 1 prefix (functional notation) 
+    + (1, 1)
+    1.+( 1 ) plus member f-n
+    
+    1 + 1 infix notation
+    1 1 + postfix (stack calculation) (pulish reverse notation ??)
+    ...
+    
 CANONICAL FORM
+    coplin??
 CONCLUSION
 
 ------------------------------------------------------------------------------------------------------------
