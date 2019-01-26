@@ -1,25 +1,28 @@
 #include <iostream>
 
-int			main( int ac, char **av ) {
+int main(int argc, char **argv)
+{
 
-	int		length;
+    int length;
 
-	if (ac == 1) {
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
-	}
+    if (argc == 1)
+    {
+        std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
+    }
 
-	for ( size_t i = 1; i < ac; i++ ) {
+    for (size_t i = 1; i < argc; i++)
+    {
 
-		length = strlen(av[i]);
-		for ( size_t g = 0; g < length; g++ ) {
-			av[i][g] = toupper( av[i][g] );
-		}
+        length = strlen(argv[i]);
+        for (size_t g = 0; g < length; g++)
+        {
+            argv[i][g] = toupper(argv[i][g]);
+        }
 
-		std::cout << av[i];
+        std::cout << argv[i];
+    }
+    // выводим новую строку здесь чтобы каждый новый аргумент не отображался на новой строке
+    std::cout << std::endl;
 
-	}
-	std::cout << std::endl;
-
-	return 0;
-
+    return 0;
 }
