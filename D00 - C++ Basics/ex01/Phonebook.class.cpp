@@ -59,7 +59,8 @@ void		Phonebook::table_out_helper( std::string str, \
 	if (isstart) {
 		std::cout << "|";
 	}
-
+	// 	setw (int n);
+	// Sets the field width to be used on output operations.
 	std::cout << std::right << std::setw(10) << str << "|";
 
 	if (isend) {
