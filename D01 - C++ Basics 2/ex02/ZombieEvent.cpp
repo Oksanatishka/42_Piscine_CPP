@@ -26,8 +26,7 @@ std::string		ZombieEvent::makeRandomString( bool startFromCapital )
 	return rNS;
 }
 
-
-
+// on the stack 
 void			ZombieEvent::randomChump( void )
 {
 	Zombie			randomZombie(makeRandomString(true), makeRandomString(false));
@@ -40,6 +39,7 @@ void			ZombieEvent::setZombieType( Zombie* theZombie, std::string type )
 	theZombie->setType(type);
 }
 
+// on the heap to manage memory and leaks
 Zombie*			ZombieEvent::newZombie( std::string name, std::string type )
 {
 	Zombie*	newZombie = new Zombie(name, type);
