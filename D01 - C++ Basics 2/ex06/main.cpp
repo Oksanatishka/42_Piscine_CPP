@@ -1,3 +1,4 @@
+// To compile: clang++ -Wall -Wextra -Werror main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
 #include "HumanA.hpp"
 #include "HumanB.hpp"
 
