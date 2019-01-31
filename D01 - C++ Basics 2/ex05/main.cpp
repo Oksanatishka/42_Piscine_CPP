@@ -1,3 +1,4 @@
+// To compile: clang++ -Wall -Wextra -Werror main.cpp Brain.cpp Human.cpp
 #include "Human.hpp"
 #include <iostream>
 
