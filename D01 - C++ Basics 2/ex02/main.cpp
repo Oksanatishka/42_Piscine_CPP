@@ -1,3 +1,4 @@
+// To compile: clang++ -Wall -Wextra -Werror main.cpp Zombie.cpp ZombieEvent.cpp
 #include "ZombieEvent.hpp"
 
 int		main( void )
