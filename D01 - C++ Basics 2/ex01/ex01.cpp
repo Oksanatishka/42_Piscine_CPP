@@ -1,3 +1,4 @@
+// To compile: clang++ -Wall -Wextra -Werror ex01.cpp
 #include <iostream>
 
 void	memoryLeak( void )
