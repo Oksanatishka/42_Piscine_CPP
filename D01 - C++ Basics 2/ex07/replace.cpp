@@ -1,7 +1,7 @@
 #include <string>
-#include <fstream>
-#include <sstream>
-#include <iostream>
+#include <fstream>	// Input/output stream class to operate on files.
+#include <sstream>	// Header providing string stream classes
+#include <iostream>	// Input/output stream
 
 int		main( int ac, char **av )
 {
@@ -15,6 +15,8 @@ int		main( int ac, char **av )
 	const std::string		fileName(av[1]);
 	const std::string		toFind(av[2]);
 	const std::string		toReplace(av[3]);
+	// ifstream	Input stream class to operate on files.
+	// ofstream	Output stream class to operate on files.
 	std::ifstream			fileToFindIn(fileName);
 	std::ofstream			fileToWriteReplacements(fileName + ".replace");
 	if ( !fileToFindIn || !fileToWriteReplacements )
@@ -23,7 +25,8 @@ int		main( int ac, char **av )
 		std::cerr << "usage: ./replace file_name string_to_find string_to_replace_with" << std::endl;
 		return 2;
 	}
-
+	// seekg	Sets the position of the next character to be extracted from the input stream.
+	// tellg	Returns the position of the current character in the input stream.
 	fileToFindIn.seekg(0, fileToFindIn.end);
 	const size_t			length(fileToFindIn.tellg());
 	if (length == std::string::npos) {
