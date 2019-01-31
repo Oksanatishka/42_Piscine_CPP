@@ -7,7 +7,7 @@ int		main( void )
 	Zombie			Foo("Foo", "beer");
 	Zombie*			Karl = ZombieEvent.newZombie("Karl", "killer");
 
-	ZombieEvent.setZombieType( &Foo, "bar");
+	ZombieEvent.setZombieType( &Foo, "bar");	// reference
 	Foo.annonce();
 	Karl->annonce();
 	ZombieEvent.randomChump();
