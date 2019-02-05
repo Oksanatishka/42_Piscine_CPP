@@ -427,10 +427,10 @@ FILESTREAM
       unsigned int    dst;
       unsigned int    dst2;
       ifs >> dst >> dst2;
-      std::count << dst << " " << dst2 << std::endl;
+      std::cout << dst << " " << dst2 << std::endl;
       ifs.close();
       //------------
-      std::ofstream   ifs("test.out");
+      std::ofstream   ofs("test.out");
       ofs << "i like ponies" << std::endl;
       ofs.close();
   }
@@ -468,19 +468,19 @@ AD-HOC POLYMORPHISM
     Open Sample.class.cpp
     ..
     void Sample::bar(char const c) const {
-      std:: count << "Member f-n bar called with char overload" << std::endl;   
+      std:: cout << "Member f-n bar called with char overload" << std::endl;   
       return;
     }
     void Sample::bar(int const n) const {
-      std:: count << "Member f-n bar called with int overload" << std::endl;   
+      std:: cout << "Member f-n bar called with int overload" << std::endl;   
       return;
     }
     void Sample::bar(float const z) const {
-      std:: count << "Member f-n bar called with float overload" << std::endl;   
+      std:: cout << "Member f-n bar called with float overload" << std::endl;   
       return;
     }
     void Sample::bar(Sample const & i) const {
-      std:: count << "Member f-n bar called with Sample class overload" << std::endl;   
+      std:: cout << "Member f-n bar called with Sample class overload" << std::endl;   
       return;
     }
     ..
