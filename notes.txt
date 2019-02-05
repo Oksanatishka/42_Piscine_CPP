@@ -444,6 +444,13 @@ FILESTREAM
 D02
 ------------------------------------------------------------------------------------------------------------
 INTRODUCTION
+	1) ad hoc polymorphism
+ad hoc polymorphism is a kind of polymorphism in which polymorphic functions can be applied to arguments of different types, because a polymorphic function can denote a number of distinct and potentially heterogeneous implementations depending on the type of argument(s) to which it is applied. It is also known as function overloading or operator overloading.
+
+	2) Function overload - possibility to have many different f-ns with the same name and taking different parameters.
+	   Operator overload
+	3) Canonical form of a class. 
+	
 AD-HOC POLYMORPHISM
     Function overloading. 
     Principle: you have 1 f-n name and different parameters for overload - this will allow you to specialize the process of a f-n
@@ -468,22 +475,23 @@ AD-HOC POLYMORPHISM
     Open Sample.class.cpp
     ..
     void Sample::bar(char const c) const {
-      std:: cout << "Member f-n bar called with char overload" << std::endl;   
+      std:: cout << "Member f-n bar called with char overload: " << c << std::endl;   
       return;
     }
     void Sample::bar(int const n) const {
-      std:: cout << "Member f-n bar called with int overload" << std::endl;   
+      std:: cout << "Member f-n bar called with int overload: " << n << std::endl;   
       return;
     }
     void Sample::bar(float const z) const {
-      std:: cout << "Member f-n bar called with float overload" << std::endl;   
+      std:: cout << "Member f-n bar called with float overload: " << z << std::endl;   
       return;
     }
     void Sample::bar(Sample const & i) const {
+      ( void ) i;
       std:: cout << "Member f-n bar called with Sample class overload" << std::endl;   
       return;
     }
-    ..
+    
     
     
 OPERATOR OVERLOAD
