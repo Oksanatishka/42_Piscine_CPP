@@ -4,6 +4,8 @@
 #include <iostream>
 
 // a canonical class to represent fixed point numbers :
+// Например, fixed <8,3> обозначает 8-битное число с фиксированной точкой, из которых 3 самых правых бита являются дробными. 
+// 00010.110 (в двоичной с-ме) = 0 + 0 + 0 + 1 * 2(1) + 0 + 1 * 2(-1) + 1 * 2(-2) + 0 = 2.75
 class Fixed
 {
 // Public members :
