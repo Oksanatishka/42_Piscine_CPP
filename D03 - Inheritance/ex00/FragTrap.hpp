@@ -1,3 +1,9 @@
+// Coplien’s form is composed of:
+// Constructor
+// Destructor
+// Copy constructor
+// & Operation overload =
+
 #ifndef FRAGTRAP_HPP
 # define FRAGTRAP_HPP
 
